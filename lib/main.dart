@@ -1,3 +1,4 @@
+import 'package:arapface/core/approutes.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -8,6 +9,9 @@ class ArapFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: Approutes.router,
+    );
   }
 }
