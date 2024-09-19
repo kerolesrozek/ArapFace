@@ -1,6 +1,5 @@
 
 import 'package:arapface/core/app_styles.dart';
-import 'package:arapface/core/approutes.dart';
 import 'package:arapface/features/Auth/presentation/views/widgets/custom_button.dart';
 import 'package:arapface/features/Auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
