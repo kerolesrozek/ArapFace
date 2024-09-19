@@ -36,6 +36,7 @@ class LoginViewBody extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
+              obscureText: false,
               hint: 'Email',
               suffixIcon: Icon(Icons.email),
             ),
@@ -43,6 +44,7 @@ class LoginViewBody extends StatelessWidget {
               height: 20,
             ),
             CustomTextField(
+              obscureText: true,
               hint: 'Password',
               suffixIcon: Icon(Icons.password),
             ),

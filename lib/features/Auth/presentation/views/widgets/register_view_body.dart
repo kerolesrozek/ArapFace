@@ -1,12 +1,17 @@
 import 'package:arapface/core/app_styles.dart';
 import 'package:arapface/core/approutes.dart';
+import 'package:arapface/features/Auth/domain/entities/person_auth_entity.dart';
+import 'package:arapface/features/Auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:arapface/features/Auth/presentation/views/widgets/custom_button.dart';
 import 'package:arapface/features/Auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({super.key});
+  RegisterViewBody({super.key});
+  late  String email;
+  late  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class RegisterViewBody extends StatelessWidget {
               'ArapFace',
               style: AppStyles.textStyle40,
             ),
-        const    SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Align(
@@ -32,27 +37,65 @@ class RegisterViewBody extends StatelessWidget {
                 style: AppStyles.textStyle22,
               ),
             ),
-        const    SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CustomTextField(
+              obscureText: false,
+              onSubmitted: (p0) {
+                email = p0;
+              },
               hint: 'Email',
               suffixIcon: Icon(Icons.email),
             ),
-        const    SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CustomTextField(
+              obscureText: true,
+              onSubmitted: (p0) {
+                password = p0;
+                
+              },
               hint: 'Password',
               suffixIcon: Icon(Icons.password),
             ),
-          const  SizedBox(
+            const SizedBox(
               height: 20,
             ),
-          CustomButton(
-            buttonName: 'Register',
-          ),
-        const    SizedBox(
+            BlocConsumer<RegisterCubit, RegisterState>(
+              listener: (context, state) {
+                if (state is RegisterSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Successsss'),
+                    ),
+                  );
+                }
+                if (state is RegisterFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                return CustomButton(
+                  onTap: () {
+                    BlocProvider.of<RegisterCubit>(context).register(
+                      personAuthEntity: PersonAuthEntity(
+                        email: email,
+                        password: password,
+                      ),
+                    );
+                  },
+                  isLoading: state is RegisterLoading ? true : false,
+                  buttonName: 'Register',
+                );
+              },
+            ),
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -64,18 +107,17 @@ class RegisterViewBody extends StatelessWidget {
                       .copyWith(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 TextButton(
-                  onPressed: (){
-                    GoRouter.of(context).push(Approutes.kLoginView);
-                  },
-            child: Text( 'Login',
-                  style: AppStyles.textStyle22.copyWith(
-                    fontSize: 18,
-                    color: Colors.black
-                  ),
-            ))
+                    onPressed: () {
+                      GoRouter.of(context).push(Approutes.kLoginView);
+                    },
+                    child: Text(
+                      'Login',
+                      style: AppStyles.textStyle22
+                          .copyWith(fontSize: 18, color: Colors.black),
+                    ))
               ],
             ),
-          const  SizedBox(
+            const SizedBox(
               height: 15,
             ),
             // SizedBox(
