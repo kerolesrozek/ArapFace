@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key,
+    super.key, required this.buttonName,
   });
+  final String buttonName;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CustomButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Center(
             child: Text(
-          'Register',
+          buttonName,
           style: AppStyles.textStyle22,
         )),
         decoration: BoxDecoration(

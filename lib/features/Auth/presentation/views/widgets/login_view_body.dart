@@ -1,3 +1,4 @@
+
 import 'package:arapface/core/app_styles.dart';
 import 'package:arapface/core/approutes.dart';
 import 'package:arapface/features/Auth/presentation/views/widgets/custom_button.dart';
@@ -5,8 +6,8 @@ import 'package:arapface/features/Auth/presentation/views/widgets/custom_text_fi
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({super.key});
+class LoginViewBody extends StatelessWidget {
+  const LoginViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class RegisterViewBody extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: Text(
-                'Register',
+                'LogIn',
                 style: AppStyles.textStyle22,
               ),
             ),
@@ -50,7 +51,7 @@ class RegisterViewBody extends StatelessWidget {
               height: 20,
             ),
           CustomButton(
-            buttonName: 'Register',
+            buttonName: 'LogIn',
           ),
         const    SizedBox(
               height: 10,
@@ -59,15 +60,15 @@ class RegisterViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'You already hanve an account?',
+                  'You dont hanve an account?',
                   style: AppStyles.textStyle22
                       .copyWith(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 TextButton(
                   onPressed: (){
-                    GoRouter.of(context).push(Approutes.kLoginView);
+                    GoRouter.of(context).pop();
                   },
-            child: Text( 'Login',
+            child: Text( 'Register',
                   style: AppStyles.textStyle22.copyWith(
                     fontSize: 18,
                     color: Colors.black
